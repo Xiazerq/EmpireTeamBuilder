@@ -1,0 +1,304 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: scroll;
+  color: black;
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  line-height: 1.5em;
+}
+
+ul {
+  list-style: none;
+}
+
+#container{
+  width:100%;
+  height: 100%;
+  text-align: center;
+  border: 1px solid red;
+  float: left;
+}
+
+#banner{
+  color: white;
+  padding: 5px;
+  float:left;
+  width:100%;
+  height: 64px;
+  background-color: blue;
+  overflow-y:scroll;
+}
+#banner h1{
+
+  display: inline-block;
+}
+
+#banner  .GuildData{
+  border: 2px solid white;
+  padding: 5px;
+  font-weight: bold;
+  display:inline-block;
+
+}
+
+#banner  .selected{
+  border: 2px solid black;
+  font-weight: bold;
+  display:inline-block;
+  color: black;
+  background-color: white;
+}
+
+#toonSelector{
+  margin:0;
+  float: left;
+  border: 1px solid blue;
+  color:white;
+  overflow: auto; 
+  overflow-y: scroll;
+  padding: 10px;
+  height: 168px;
+  text-align: center;
+
+}
+#toonSelector .level{
+  display:none;
+
+}
+.hiddenData{
+  display:none;
+}
+.builder{
+  height: 84px;
+  width: 90%;
+
+}
+.builder li{
+  display: inline-block;
+
+}
+#teamBuilder{
+  margin:0;
+  float:  left;
+  text-align: center;
+  /*
+  width:84px;
+  height: 400px;
+  */
+  padding: 10px;
+  border: 1px solid green;
+  color: white;
+  overflow-y: hidden;
+
+}
+.teaming{
+  float:  left;
+  margin:0;
+  border: 1px solid blue;
+  overflow-y: scroll;
+  width: 450px;
+  text-align: left;
+
+}
+#guildTeams{
+  height: 90%;
+  padding: 10px;
+  color: white;
+}
+
+.toonProfile{
+  margin: 10px;
+  width: 64px;
+  height: 64px;
+  /*border: 1px solid red;*/
+  border-radius: 30px;
+  position: relative;
+}
+.toonProfile img{
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+.locked{
+  /*background: center 0 transparent url('../images/locked.png') no-repeat;*/
+  opacity: .5;
+}
+
+.locked .lock{
+
+  width: 50%;
+  height: 50%;
+  bottom: -5px;
+
+  -webkit-transform: translate(50%);
+  transform: translate(50%);
+  border-radius: 0px;
+}
+
+.playerData{
+  margin: 0px;
+  padding: 0px;
+  background-color: lightgrey;
+  border-radius: 15px;
+}
+.playerData li{
+  display: inline-block;
+}
+
+.playerData .playerBanner{
+  border: 1px solid blue;
+  border-radius: 15px;
+}
+.playerBanner h1{
+  display: inline;
+  color: black;
+  margin: 0;
+  font-size: 11pt;
+  padding: 0 5px;
+}
+.playerData .TotalPower{
+  float:right;
+}
+.playerData img{
+  position: absolute;
+}
+.playerData .playerToon{
+  z-index: 0;
+}
+.playerData .playerGear{
+  z-index: 1;
+  /*
+  width: 101%;
+  height: 101%;
+  */
+}
+.playerData .totalPower{
+  float: right;
+}
+.playerData .closeTeam {
+  border-radius: 25px;
+  width: 25px;
+  height:25px;
+  background-color: maroon;
+  font-size: 16pt;
+  color:white;
+  float:right;
+  text-align: center;
+  cursor:pointer;
+
+}
+.toonProfile .level{
+  font-size: 11pt;
+
+  -webkit-transform: translate(-50%);
+  transform: translate(-50%);
+
+  color: #fff;
+  background-color: #264257;
+  border: 1px solid #fff;
+  text-align: center;
+  border-radius: 100%/130% 130% 15px 15px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: -1px -1px 0 black, 2px -1px 0 black, 2px 2px 0 black, -1px 2px 0 black, 2px 3px 0 black, 1px 3px 0 black, 2px 3px 0 black;
+  position: absolute;
+
+  bottom: -5px;
+  left: 50%;
+  z-index: 4;
+  width: 20px;
+  height: 20px;
+  padding: 0 5px;
+
+  line-height: 1.5;
+}
+
+.playerData .star {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  width: 15px;
+  height: 46px;
+  color: #000;
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+  background: center 0 transparent url('../images/borders/star.png') no-repeat;
+  background-size: 100%;
+}
+.playerData .star1 {
+    -webkit-transform: translateX(-50%) rotate(-0);
+    transform: translateX(-50%) rotate(-60deg);
+}
+.playerData .star2 {
+    -webkit-transform: translateX(-50%) rotate(-40deg);
+    transform: translateX(-50%) rotate(-40deg);
+}
+.playerData .star3 {
+    -webkit-transform: translateX(-50%) rotate(-20deg);
+    transform: translateX(-50%) rotate(-20deg);
+}
+.playerData .star4 {
+    -webkit-transform: translateX(-50%) rotate(0deg);
+    transform: translateX(-50%) rotate(0deg);
+}
+.playerData .star5 {
+    -webkit-transform: translateX(-50%) rotate(20deg);
+    transform: translateX(-50%) rotate(20deg);
+}
+.playerData .star6 {
+    -webkit-transform: translateX(-50%) rotate(40deg);
+    transform: translateX(-50%) rotate(40deg);
+}
+.playerData .star7 {
+    -webkit-transform: translateX(-50%) rotate(60deg);
+    transform: translateX(-50%) rotate(60deg);
+}
+.playerData .star-inactive {
+    background-image: url('../images/borders/star-inactive.png');
+}
+
+.phaseBuilder{
+  position: relative;
+  height: 90%;
+  z-index: 2;
+  overflow-y: none;
+  display:block;
+}
+.phaseBuilder .phaseBanner label{
+ border: 1px solid black;
+ padding: 5px;
+}
+.phaseBuilder .phaseBanner div{
+  display:inline-block;
+  font-weight: bold;
+}
+.phaseBuilder .phaseBanner h1{
+  width: 100%; 
+  height: 5%;
+  font-size: 16pt;
+  background-color: white;
+  z-index: 1;
+}
+.phaseBuilder .phaseTeams{
+  margin-top: 5px;
+  height: auto;
+  min-height: 75%;
+  border: 1px solid green;
+  overflow-y: scroll;
+}
+#credits{
+  font-size:8pt;
+padding: 10px;
+  display: inline-block;
+  width:100%;
+  height: 3em;
+}
+.filtering{
+  padding: 3px;
+  text-align: center;
+  width:100%;
+  height: 2em;
+  background-color: lightgrey;
+  float:left;
+
+}

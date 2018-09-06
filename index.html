@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/swgohDirect.css">
+<style>
+
+</style>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="scripts/jquery-ui.js"></script>
+<script src="scripts/jquery-touch-punch.js"></script>
+<script src="scripts/requests.js"></script>
+<script src="scripts/chimaera.js"></script>
+<script>
+
+  //<link href="https://fonts.googleapis.com/css?family=Sahitya|Share+Tech+Mono|Yanone+Kaffeesatz" rel="stylesheet">
+  //<script src="scripts/parallax.js"><//script>//https://code.jquery.com/jquery-3.3.1.min.js
+//$( "#toonSelector" ).droppable();
+//$( "#teamBuilder" ).droppable();
+$( function() {
+  $( "#toonSelector, #teamBuilder" ).sortable({
+        connectWith: ".builder",
+        scroll: false,
+        receive: function( event, ui ) {
+
+            //console.log("Recieved");
+            //var _ui = $(ui);
+            var _item = $(ui.item);
+
+            //console.log(_item.parent().children().length);
+            if ($("#teamBuilder").children().length > 5) {
+                //ui.sender: will cancel the change.
+                //Useful in the 'receive' callback.
+                $(ui.sender).sortable('cancel');
+
+            }else if(ui.sender[0].id == "toonSelector"){
+              console.log(_item.attr("value"));
+              BuildGuildTeams(_item);
+              //BuildGuildTeams(_item.attr("value"), _item.children().first());
+
+              //var _count = $("#guildTeams ul." + chimaera + " li." + ).length
+              //_item.append($("<div>", {class:"level", text: $("#guildTeams li.REYJEDITRAINING").length}));
+
+            }else {
+              $("#guildTeams ." + _item.attr("value")).each(function(){
+
+                var $power = $(this).parent().children(".playerBanner").children(".TotalPower");
+
+                var _totalPower = parseInt($power.attr("value"), 10);
+                var _toonPower = parseInt($(this).attr("value"), 10);
+                var _data = _totalPower - _toonPower;
+                $power.attr("value", _data).text(_data); 
+
+                //$(this).remove();
+
+              }).remove();
+            }
+            sortGuildTeams();
+            
+        }
+      }).disableSelection();
+
+  $( "#teamBuilder" ).sortable({
+    update: function(event, ui ){
+      //console.log("Update");
+      var _item = $(ui.item);
+      var _index = _item.index();//$("#teamBuilder").
+
+      //$(".")
+
+      var thisGuild = $("#banner .selected").attr("value");
+      //$("#guildTeams ul.chimaera li.B2SUPERBATTLEDROID").length
+      $("#guildTeams>ul." + thisGuild + ">li." + _item.attr("value")).each(function(){
+        var $this = $(this);
+        var $parent = $this.parent();
+        var _thisIndex = $parent.children().index($this);
+
+        var $after =  $($parent.children().get(_index >= _thisIndex ? (_index + 1): _index));
+
+        $this.insertAfter($after);
+      })
+    }
+  });
+  
+  $( "#guildTeams, .phaseTeams").sortable({
+    connectWith: ".phaseTeams",
+    handle: ".playerBanner",
+    receive: function(event, ui){
+      var $item = $(ui.item)
+      $close = $("<div>",{class: "closeTeam", text:"X"});
+      var $cloned = $item.clone();
+
+      $cloned.children(".playerBanner").prepend($close);
+      $close.click(function(){
+        $cloned.remove();
+        UpdatePhaseTeams();
+      })
+      $item.after($cloned);
+      $(ui.sender).sortable('cancel');
+      UpdatePhaseTeams();
+
+    }
+  });
+
+  $( "#teamsFilter>select").on("change", function(){
+    updateFiltered();
+  });
+  //
+});
+</script>
+</head>
+<body>
+  <div id="banner">
+    <!-- <label>Guild ID</label>
+    <input type="text" />
+    <button id="getGuildJSON">Get Guild</button>
+  --><h1> EMPÎRE ALLÎANCE </h1>
+    <div id="chimaera" class="GuildData" value="chimaera">Chimaera</div>
+    <div id="vanguard" class="GuildData" value="vanguard">Vanguard</div>
+    <div id="vengeance" class="GuildData" value="vengeance">Vengeance</div>
+    <div id="predator" class="GuildData" value="predator">Predator</div>
+    <div id="execut0r" class="GuildData" value="execut0r">Executor</div>
+    <div id="reaper" class="GuildData" value="reaper">Reaper</div>
+    <div id="ravager" class="GuildData" value="ravager">Ravager</div>
+    <div id="eclipse" class="GuildData" value="eclipse">Eclipse</div>
+    <div id="perilous" class="GuildData" value="perilous">Perilous</div>
+    <div id="nemesis" class="GuildData" value="nemesis">Nemesis</div>
+    <div id="devastator" class="GuildData" value="devastator">Devastator</div>
+    <div id="output"></div>
+    <div id="credits">Built by Xiazer#7965</div>
+  </div>
+    <div id="toonsFilter" class="filtering"></div>
+    <ul id="toonSelector" class="builder"></ul>
+    <!--
+  
+  -->
+    <ul id="teamBuilder" class="builder"></ul>
+    <div id="teamsFilter" class="filtering">
+      <span>Stars Min:</span>
+      <select id="starFilter">
+        <option value="0">Any</option>
+        <option value="1">1*</option>
+        <option value="2">2*</option>
+        <option value="3">3*</option>
+        <option value="4">4*</option>
+        <option value="5">5*</option>
+        <option value="6">6*</option>
+        <option value="7">7*</option>
+      </select>
+      <span>Gear Min:</span>
+      <select id="gearFilter">
+        <option value="0">Any</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>
+    </div>
+    <div id="container">
+      <div id="guildTeams" class="teaming"></div>
+      <div class="phaseBuilder teaming">
+        <div class="phaseBanner">
+          <h1>Phase Data</h1>
+          <label>Number of Teams: <div id="numTeams" class="data"></div></label>
+          <label>Damage % Per Team: <div id="numMin" class="data"></div></label>
+          <button id="printTeams" style="display:none">Print</button>
+        </div>
+        <div class="phaseTeams">
+        </div>
+      </div>
+    </div>
+</body>
+</html>
