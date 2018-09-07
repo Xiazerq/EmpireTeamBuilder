@@ -23,8 +23,8 @@ $(document).ready(function(){
         });
 
         request.done(function (response, textStatus, jqXHR){
-            //guildToons = JSON.parse(response);
-            guildToons = response;
+            guildToons = JSON.parse(response);
+            //guildToons = response;
 
             BuildAllMembers();
 
@@ -77,8 +77,8 @@ function requestToons(){
             //console.log(response);
             BuildAllMembers();
 
-            //BuildToonGUI(JSON.parse(response));
-            BuildToonGUI(response);
+            BuildToonGUI(JSON.parse(response));
+            ///BuildToonGUI(response);
             //$("#output").html(response);
             //$(".clipBoard").show(true);
         });

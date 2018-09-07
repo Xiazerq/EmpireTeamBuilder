@@ -48,7 +48,7 @@ function BuildGuildTeams(ToonObject){
 
 	for(var x in guildToons[toonID]){
 		var toon = guildToons[toonID][x];
-
+		/*
 		if(!guildObjects.hasOwnProperty(toon.player)){
 
 			guildObjects[toon.player] = $("<ul>", {
@@ -61,6 +61,7 @@ function BuildGuildTeams(ToonObject){
 			
 			$("#guildTeams").append(guildObjects[toon.player]);
 		}
+		*/
 		var _pData = guildObjects[toon.player]; 
 	
 		if(_pData.children("." + toonID).length < 1){
