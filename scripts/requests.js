@@ -27,7 +27,7 @@ $(document).ready(function(){
             //guildToons = response;
 
             BuildAllMembers();
-
+            /*
             $("#teamBuilder").children().each(function(){
                 var _item = $(this);
 
@@ -40,6 +40,7 @@ $(document).ready(function(){
             });
 
             sortGuildTeams();
+            */
         });
 
         request.fail(function (jqXHR, textStatus, errorThrown){

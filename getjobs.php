@@ -16,7 +16,7 @@
 
 	foreach($guilds as $guildName => $guildID){
 		//https://swgoh.gg/api/guilds/25666/units/
-		$url = "https://swgoh.gg/api/guilds/". $guildID . "/units/";
+		$url = "https://swgoh.gg/api/guilds/". $guildID;
 		echo "url:(".$url.")";
 		$encodedJSON = file_get_contents($url);
 
