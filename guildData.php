@@ -3,8 +3,53 @@
 
     date_default_timezone_set("America/New_York");
 
+
     function guildData_Organize($guildData, $toonName, $guildName){
-		echo json_encode($guildData->players[0]->data);
+
+    	$returnData = array();
+		
+		for($x = 0; $x < count($guildData->players); $x++){
+			$player = $guildData->players[$x]->data;
+			//$toons = $guildData->players[$x]->units;
+
+			$memToon = guildData_MemberToon($toonName, $guildData->players[$x]->units);
+
+			if($memToon != false){
+
+				$returnData[] = array(	'player' => $player,
+										'toon' => $memToon
+
+				);
+			}
+
+		}
+
+		//echo json_encode($guildData->players[0]->data);
+		$data =  json_encode($returnData);
+		if($data === null) {
+			echo "ERROR: JSON not valid for ".$guildName;
+		 // $ob is null because the json cannot be decoded
+		}else{
+			echo $data;
+		}
+
+    }
+
+    function guildData_MemberToon($filterToon, $memberToons){
+
+    	//array_filter($toons, $guildData_MemberToon()
+    	$returnToon = false;
+
+    	for($x = 0; $x < count($memberToons); $x++){
+
+    		if(strcasecmp($filterToon, $memberToons[$x]->data->base_id) == 0){
+
+    			$returnToon = $memberToons[$x]->data;
+    			break;
+    		}
+
+    	}
+    	return $returnToon;
 
     }
 

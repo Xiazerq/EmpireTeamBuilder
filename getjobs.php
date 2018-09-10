@@ -15,8 +15,9 @@
 		);
 
 	foreach($guilds as $guildName => $guildID){
-		//https://swgoh.gg/api/guilds/25666/units/
-		$url = "https://swgoh.gg/api/guilds/". $guildID;
+		//https://swgoh.gg/api/guilds/25666/units/	OLD URL
+		//https://swgoh.gg/api/guild/25666/			NEW URL
+		$url = "https://swgoh.gg/api/guild/". $guildID;
 		echo "url:(".$url.")";
 		$encodedJSON = file_get_contents($url);
 
@@ -25,7 +26,7 @@
 			echo "ERROR: JSON not valid for ".$guildName;
 		 // $ob is null because the json cannot be decoded
 		}else{
-			file_put_contents("guildData/".$guildName.'.json', $encodedJSON);
+			file_put_contents("guildData/NEW_".$guildName.'.json', $encodedJSON);
 		}
 	}
 
