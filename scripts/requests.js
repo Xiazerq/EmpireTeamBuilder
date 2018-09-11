@@ -2,18 +2,28 @@ $(document).ready(function(){
     requestToons();
     var request;
     $(".GuildData").click(function(event){
+        /*
         event.preventDefault();
 
         if (request) {
             request.abort();
         }
+        */
         $("#banner .selected").removeClass("selected");
         $(this).addClass("selected");
         var thisGuild = $(this).attr("value");
 
         $(".playerData").hide();
-         $("." + thisGuild ).show();
+        $("." + thisGuild ).show();
 
+        $("#teamBuilder").children().each(function(){
+            var _item = $(this);
+            requestGuildToons(_item)
+            //BuildGuildTeams(_item);
+        });
+
+        sortGuildTeams();
+  /*
         var _url = "guildData/"+ thisGuild +".json"
 
         request = $.ajax({
@@ -27,7 +37,7 @@ $(document).ready(function(){
             //guildToons = response;
 
             BuildAllMembers();
-            /*
+          
             $("#teamBuilder").children().each(function(){
                 var _item = $(this);
 
@@ -40,7 +50,7 @@ $(document).ready(function(){
             });
 
             sortGuildTeams();
-            */
+           
         });
 
         request.fail(function (jqXHR, textStatus, errorThrown){
@@ -51,12 +61,46 @@ $(document).ready(function(){
 
             $("#output").html("Error Getting Data");
         });
-
+*/
     });
     //});
     $("#chimaera").click();
     //new Clipboard('.clipBoard');
 });
+function requestSelectedGuild(){
+    return $("#banner .selected").attr("value");
+}
+function requestGuildToons($toon){
+    requestJSON("guildData.php", { character: $toon.attr("value"), guild: requestSelectedGuild()}, guildBuildMemberTeams, $toon);
+}
+
+function requestJSON(url, data, callback, passThroughData){
+    var request;
+
+    if (request) {
+        request.abort();
+    }
+
+    request = $.ajax({
+        url: url,
+        contentType: "application/json",
+        data: data,
+        datatype: "JSON"
+    });
+
+    request.done(function (response, textStatus, jqXHR){
+        callback(JSON.parse(response), passThroughData);
+        //callback(response, passThroughData);
+    });
+
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        console.error(
+            "The following error occurred: " + textStatus, errorThrown
+        );
+
+        $("#output").html("Error Getting Data");
+    });
+}
 
 function requestToons(){
    var request;
@@ -71,15 +115,15 @@ function requestToons(){
         request = $.ajax({
             url: "scripts/toons.json",
             contentType: "application/json",
-            data: "JSON"
+            datatype: "JSON"
         });
 
         request.done(function (response, textStatus, jqXHR){
             //console.log(response);
-            BuildAllMembers();
+            //BuildAllMembers();
 
-            BuildToonGUI(JSON.parse(response));
-            ///BuildToonGUI(response);
+             BuildToonGUI(JSON.parse(response));
+            //BuildToonGUI(response);
             //$("#output").html(response);
             //$(".clipBoard").show(true);
         });

@@ -11,6 +11,7 @@
 <script src="scripts/jquery-ui.js"></script>
 <script src="scripts/jquery-touch-punch.js"></script>
 <script src="scripts/requests.js"></script>
+<script src="scripts/guilds.js"></script>
 <script src="scripts/chimaera.js"></script>
 <script>
 
@@ -25,34 +26,38 @@ $( function() {
         scroll: false,
         receive: function( event, ui ) {
 
-            //console.log("Recieved");
+            console.log("Recieved");
             //var _ui = $(ui);
             var _item = $(ui.item);
 
-            //console.log(_item.parent().children().length);
+            //Check if there is already 5 toons on the team, if so cancel the drop
             if ($("#teamBuilder").children().length > 5) {
                 //ui.sender: will cancel the change.
                 //Useful in the 'receive' callback.
                 $(ui.sender).sortable('cancel');
 
+            //Now check if it's the new toon is being sent from the catalog
             }else if(ui.sender[0].id == "toonSelector"){
               console.log(_item.attr("value"));
-              BuildGuildTeams(_item);
-              //BuildGuildTeams(_item.attr("value"), _item.children().first());
 
+              requestGuildToons(_item);
+              //BuildGuildTeams(_item);
+              //BuildGuildTeams(_item.attr("value"), _item.children().first());
               //var _count = $("#guildTeams ul." + chimaera + " li." + ).length
               //_item.append($("<div>", {class:"level", text: $("#guildTeams li.REYJEDITRAINING").length}));
 
             }else {
+              //If the new toon is being sent from the team builder recalculate the phase data
               $("#guildTeams ." + _item.attr("value")).each(function(){
 
+                guildUpdateTeamPower($(this).parent(), parseInt($(this).attr("value"), 10) * -1);
+                /*
                 var $power = $(this).parent().children(".playerBanner").children(".TotalPower");
-
                 var _totalPower = parseInt($power.attr("value"), 10);
                 var _toonPower = parseInt($(this).attr("value"), 10);
                 var _data = _totalPower - _toonPower;
                 $power.attr("value", _data).text(_data); 
-
+                */
                 //$(this).remove();
 
               }).remove();
@@ -64,7 +69,7 @@ $( function() {
 
   $( "#teamBuilder" ).sortable({
     update: function(event, ui ){
-      //console.log("Update");
+      console.log("Update");
       var _item = $(ui.item);
       var _index = _item.index();//$("#teamBuilder").
 
@@ -72,15 +77,17 @@ $( function() {
 
       var thisGuild = $("#banner .selected").attr("value");
       //$("#guildTeams ul.chimaera li.B2SUPERBATTLEDROID").length
-      $("#guildTeams>ul." + thisGuild + ">li." + _item.attr("value")).each(function(){
-        var $this = $(this);
-        var $parent = $this.parent();
-        var _thisIndex = $parent.children().index($this);
+      setTimeout(function(){
+        $("#guildTeams>ul." + thisGuild + ">li." + _item.attr("value")).each(function(){
+          var $this = $(this);
+          var $parent = $this.parent();
+          var _thisIndex = $parent.children().index($this);
 
-        var $after =  $($parent.children().get(_index >= _thisIndex ? (_index + 1): _index));
+          var $after =  $($parent.children().get(_index >= _thisIndex ? (_index + 1): _index));
 
-        $this.insertAfter($after);
-      })
+          $this.insertAfter($after);
+        });
+      },200);
     }
   });
   
@@ -117,7 +124,7 @@ $( function() {
     <input type="text" />
     <button id="getGuildJSON">Get Guild</button>
   --><h1> EMPÎRE ALLÎANCE </h1>
-    <div id="chimaera" class="GuildData" value="newChimaera">Chimaera</div>
+    <div id="chimaera" class="GuildData" value="chimaera">Chimaera</div>
     <div id="vanguard" class="GuildData" value="vanguard">Vanguard</div>
     <div id="vengeance" class="GuildData" value="vengeance">Vengeance</div>
     <div id="predator" class="GuildData" value="predator">Predator</div>

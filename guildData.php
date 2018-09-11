@@ -10,24 +10,31 @@
 		
 		for($x = 0; $x < count($guildData->players); $x++){
 			$player = $guildData->players[$x]->data;
+
+				$player->name = preg_replace('/\s+/', "_", $player->name);
+    			unset($player->ship_galactic_power);
+    			unset($player->arena_leader_base_id);
+    			unset($player->level); 
+    			unset($player->character_galactic_power);
+    			unset($player->arena_rank);
 			//$toons = $guildData->players[$x]->units;
 
 			$memToon = guildData_MemberToon($toonName, $guildData->players[$x]->units);
 
-			if($memToon != false){
+			
 
 				$returnData[] = array(	'player' => $player,
 										'toon' => $memToon
 
 				);
-			}
+			//if($memToon != false){}
 
 		}
 
 		//echo json_encode($guildData->players[0]->data);
 		$data =  json_encode($returnData);
 		if($data === null) {
-			echo "ERROR: JSON not valid for ".$guildName;
+			echo "{ ERROR : 'ERROR: JSON not valid' }";
 		 // $ob is null because the json cannot be decoded
 		}else{
 			echo $data;
@@ -45,6 +52,12 @@
     		if(strcasecmp($filterToon, $memberToons[$x]->data->base_id) == 0){
 
     			$returnToon = $memberToons[$x]->data;
+				//echo "test";
+    			//var_dump($memberToons[$x]->data);
+    			//$returnToon = array_diff_key($memberToons[$x]->data, ["gear" => "x", "stats" => "y"]);
+    			unset($returnToon->gear);
+    			unset($returnToon->stats);
+
     			break;
     		}
 
@@ -54,10 +67,10 @@
     }
 
 	//require_once('assets/simple_html_dom.php');
-	$toonName =  ($_GET['toon']);
+	$toonName =  ($_GET['character']);
 	$guildName = ($_GET['guild']);
 
-	$string = file_get_contents("guildData/newChimaera.json");
+	$string = file_get_contents("guildData/NEW_".$guildName.".json");
 	$guildData = json_decode($string);
 	
 	if($guildData === null) {

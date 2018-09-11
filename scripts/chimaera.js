@@ -1,4 +1,5 @@
 var guildObjects = {};
+
 var guildToons;
 
 function BuildAllMembers(){
@@ -105,7 +106,7 @@ function BuildGuildTeams(ToonObject){
 			var _totalPower = parseInt($power.attr("value"), 10);
 			var _toonPower = parseInt($toon.attr("value"), 10);
 			var _data = _totalPower + _toonPower;
-			$power.attr("value", _data).text(_data); 
+			$power.attr("value", _data).text(_data);
 			
 		}	
 	}
@@ -159,9 +160,15 @@ function BuildToonGUI(toonJSON){
 				});
 
 		$toons.append($("<li>", {
+			id: _toon.base_id,
 			class :"toonProfile",
 			value: _toon.base_id
-		}).append(_img, $("<div>", {class:"level"}))); //.draggable()
+		}).append(
+			_img,
+			$("<div>", {class:"level"}),
+			$("<div>", {class:"alignment hiddenData"}).text(_toon.alignment),
+			$("<div>", {class:"role hiddenData"}).text(_toon.role)
+		)); //.draggable()
 
 	}
 
@@ -196,7 +203,9 @@ function updateFiltered(){
 	  $(_teams + ":visible>.gearLevel").each(function(){
 	  		var $this = $(this);
 	  		var _gear = parseInt($this.text(), 10);
-	  		$this.parent().parent().toggle(_gear >= gearMin);
+
+	  		$parent = $this.parent().parent();
+	  		$parent.toggle(_gear >= gearMin && $parent.is(":visible"));
 	  });
 
 	}
