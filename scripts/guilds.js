@@ -1,29 +1,6 @@
 //var guildObjects = {};
 var lastLoaded = false;
 
-function guildBuildAllMembers(){
-	if(typeof(guildToons) == "undefined") return; 
-
-	var _chewie = guildToons.CLONEWARSCHEWBACCA;
-
-	for(var x = 0; x < _chewie.length; x++){
-		var toon = _chewie[x];
-
-		if(!guildObjects.hasOwnProperty(toon.player)){
-
-			guildObjects[toon.player] = $("<ul>", {
-				class: toon.player.replace(/\s+/, "_") + " horizList playerData " + $(".GuildData.selected").attr("value")
-
-			}).append(
-				$("<div>", {class : "playerBanner", value:"Banner"}).append(
-					$("<h1>").text(toon.player),
-					$("<h1>",{class:"TotalPower", value: "0"}).text(0)));
-			
-			$("#guildTeams").append(guildObjects[toon.player]);
-		}
-	}
-}
-
 function guildBuildMemberTeams(JSON, ToonObject){
 	var toonID = ToonObject.attr("value");
 	var imageDom = ToonObject.children().first();
@@ -39,9 +16,11 @@ function guildBuildMemberTeams(JSON, ToonObject){
 		guildBuildMemberTeamRow(JSON[x].player);
 
 		var _player = guildObjects[JSON[x].player.name];
-		_player.append(guildBuildMemberToon($template, _toon ));
+		if(_player.children("." + toonID).length < 1){
+			_player.append(guildBuildMemberToon($template, _toon ));
 
-		guildUpdateTeamPower(_player, _toon ? JSON[x].toon.power : 0);
+			guildUpdateTeamPower(_player, _toon ? JSON[x].toon.power : 0);
+		}
 	}
 	//updateToonCount(ToonObject);
 	updateFiltered();
@@ -98,6 +77,10 @@ function guildBuildMemberToon($Template, ToonData){
 			}
 			return rtn;
 		});
+
+		if(ToonData.zeta_abilities.length > 0){
+			$toon.append($("<div>", {class:"zetas", text: ToonData.zeta_abilities.length}));
+		}
 
 	} else{ 
 		$toon.attr("value", 0).addClass("locked").append($("<img>", {

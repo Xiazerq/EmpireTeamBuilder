@@ -72,6 +72,10 @@ li {
 #toonSelector .level{
   display:none;
 }
+#toonSelector .zetas{
+  display:none;
+}
+
 .hiddenData{
   display:none;
 }
@@ -102,6 +106,9 @@ li {
   overflow-y: hidden;
   margin:10px 30px;
 
+}
+#teamBuilder .toonProfile{
+  margin: 0 15px;
 }
 .teaming{
   float: left;
@@ -279,7 +286,21 @@ li {
 .playerData .star-inactive {
     background-image: url('../images/borders/star-inactive.png');
 }
-
+.zetas{
+  background: center 0 transparent url(../images/zeta.png) no-repeat;
+  background-size: cover;
+  bottom: 0;
+  left: -25%;
+  width: 38px;
+  height: 38px;
+  position: absolute;
+  z-index: 3;
+  text-align: center;
+  font-size: 10pt;
+  line-height: 2.5em;
+  color: white;
+  text-shadow: -1px -1px 0 black, 2px -1px 0 black, 2px 2px 0 black, -1px 2px 0 black, 2px 3px 0 black, 1px 3px 0 black, 2px 3px 0 black;
+}
 .phaseBuilder{
   position: relative;
   z-index: 2;

@@ -2,136 +2,26 @@ var guildObjects = {};
 
 var guildToons;
 
-function BuildAllMembers(){
-	if(typeof(guildToons) == "undefined") return; 
-
-	var _chewie = guildToons.CLONEWARSCHEWBACCA;
-
-	for(var x = 0; x < _chewie.length; x++){
-		var toon = _chewie[x];
-
-		if(!guildObjects.hasOwnProperty(toon.player)){
-
-			guildObjects[toon.player] = $("<ul>", {
-				class: toon.player.replace(/\s+/, "_") + " horizList playerData " + $(".GuildData.selected").attr("value")
-
-			}).append(
-				$("<div>", {class : "playerBanner", value:"Banner"}).append(
-					$("<h1>").text(toon.player),
-					$("<h1>",{class:"TotalPower", value: "0"}).text(0)));
-			
-			$("#guildTeams").append(guildObjects[toon.player]);
-		}
-	}
-}
-
-function BuildGuildTeams(ToonObject){
-	var toonID = ToonObject.attr("value");
-	var imageDom = ToonObject.children().first();
-
-	if(typeof(guildToons) == "undefined") return; 
-
-	var $template =  $("<li>", {
-				class: "horizList playerToon toonProfile " + toonID
-			}).append(
-				imageDom.clone().addClass("playerToon")
-			);
-
-			/*,,
-				value: toon.power.toString()
-				$("<img>", {
-					src: 'images/borders/gear-icon-g' + toon.gear_level + ".svg",
-					class: "playerGear"
-				}),
-				 $("<div>", {class:"gearLevel", text: toon.gear_level}),
-				 $("<div>", {class:"level", text: toon.level})
-			);*/
-
-	for(var x in guildToons[toonID]){
-		var toon = guildToons[toonID][x];
-		/*
-		if(!guildObjects.hasOwnProperty(toon.player)){
-
-			guildObjects[toon.player] = $("<ul>", {
-				class: toon.player.replace(/\s+/, "_") + " horizList playerData " + $(".GuildData.selected").attr("value")
-
-			}).append(
-				$("<div>", {class : "playerBanner", value :"banner"}).append(
-					$("<h1>").text(toon.player),
-					$("<h1>",{class:"TotalPower", value: "0"}).text(0)));
-			
-			$("#guildTeams").append(guildObjects[toon.player]);
-		}
-		*/
-		var _pData = guildObjects[toon.player]; 
-	
-		if(_pData.children("." + toonID).length < 1){
-			var $toon = $template.clone();
-
-			/** /
-			$("<li>", {
-				class: "horizList playerToon toonProfile " + toonID,
-				value: toon.power.toString()
-			}).append(
-				imageDom.clone().addClass("playerToon"),
-				
-			);
-
-			/**/
-			$toon.attr("value", toon.power).append(
-				$("<img>", {
-					src: 'images/borders/gear-icon-g' + toon.gear_level + ".svg",
-					class: "playerGear"
-				}),
-				 $("<div>", {class:"gearLevel hiddenData", text: toon.gear_level}),
-				 $("<div>", {class:"starLevel hiddenData", text: toon.rarity}),
-				 $("<div>", {class:"level", text: toon.level})
-			);
-
-			$toon.append(function(e){
-				var rtn = $();
-				for(var x = 0; x < 7; x++){
-					_this = $("<div>", {class:"star star" + (x+1)});
-					if(toon.rarity < (x + 1)){
-						_this.addClass("star-inactive");
-					}
-					rtn = rtn.add(_this);
-				}
-				return rtn;
-			});
-			/**/
-			_pData.append($toon);
-
-			var $power = _pData.children(".playerBanner").children(".TotalPower");
-			var _totalPower = parseInt($power.attr("value"), 10);
-			var _toonPower = parseInt($toon.attr("value"), 10);
-			var _data = _totalPower + _toonPower;
-			$power.attr("value", _data).text(_data);
-			
-		}	
-	}
-	updateToonCount(ToonObject);
-
- var thisGuild = $("#banner .selected").attr("value");
-	//Add not activated toons
-	$("#guildTeams>ul." + thisGuild + ":not(:has(>li." + toonID + "))").each(function(){
-		var $toon = $template.clone();
-
-		$toon.attr("value", 0).addClass("locked").append($("<img>", {
-					src: 'images/padlock-3-24.png',
-					class: "lock"
-				}));
-		$(this).append($toon);
-
-	});
-}
-
 function updateToonCount(ToonObj){
 	
-    var thisGuild = $("#banner .selected").attr("value");
+	var thisGuild = requestSelectedGuild();
+    //$("#banner .selected").attr("value");
     //$("#guildTeams ul.chimaera li.B2SUPERBATTLEDROID").length
-	var _count = $("#guildTeams>ul." + thisGuild + ">li." + ToonObj.attr("value") + ":visible:not(.locked)").length
+    var _toonObjs = "#guildTeams>ul." + thisGuild + ">li." + ToonObj.attr("value")+ ":visible";
+	var _count = $(_toonObjs + ":not(.locked)").length;
+	var _zetaCount = $(_toonObjs + ">.zetas").length;
+	/*
+	$(_toonObjs + ">.zetas").each(function(){
+		_zetaCount += parseInt($(this).text());
+	})
+*/
 	ToonObj.children(".level").text(_count);
+
+	if(_zetaCount > 0){
+		ToonObj.children(".zetas").text(_zetaCount).toggle(true);
+	}else{
+		ToonObj.children(".zetas").toggle(false);
+	}
 	
 }
 
@@ -166,6 +56,7 @@ function BuildToonGUI(toonJSON){
 		}).append(
 			_img,
 			$("<div>", {class:"level"}),
+			$("<div>", {class:"zetas"}),
 			$("<div>", {class:"alignment hiddenData"}).text(_toon.alignment),
 			$("<div>", {class:"role hiddenData"}).text(_toon.role)
 		)); //.draggable()
