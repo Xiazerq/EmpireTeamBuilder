@@ -37,10 +37,10 @@ function guildBuildMemberTeamRow(PlayerObj){
 
 		guildObjects[PlayerName] = $("<ul>", {
 			id: PlayerName,
-			class: " horizList playerData " + $(".GuildData.selected").attr("value")
+			class: "horizList trimmed playerData " + $(".GuildData.selected").attr("value")
 
 		}).append(
-			$("<div>", {class : "playerBanner", value:"Banner"}).append(
+			$("<div>", {class : "playerBanner dragndrop", value:"Banner"}).append(
 				$("<h1>").text(PlayerName),
 				$("<h1>",{class:"TotalPower", value: "0"}).text(0)));
 		

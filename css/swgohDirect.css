@@ -17,12 +17,13 @@ li {
 }
 
 #container{
-  width: 100%;
+  width: 95%;
   min-width: 940px;
   height: 100%;
   text-align: center;
   border: 1px solid red;
   float: left;
+  margin-left: 10px;
 }
 
 #banner{
@@ -31,9 +32,17 @@ li {
   float:left;
   width:100%;
   height: 64px;
-  background-color: blue;
+  background-color: black;
   overflow-y:scroll;
 }
+
+.trimmed{
+
+  background-color: Gainsboro;
+  border-radius: 35px 5px;
+  border: 1px solid dimGrey;
+}
+
 #banner h1{
 
   display: inline-block;
@@ -58,7 +67,6 @@ li {
 #toonSelector{
   float: left;
   margin:0px;
-  border: 1px solid blue;
   color:white;
   overflow: auto; 
   overflow-y: scroll;
@@ -101,7 +109,6 @@ li {
   height: 400px;
   */
   padding: 10px;
-  border: 1px solid green;
   color: white;
   overflow-y: hidden;
   margin:10px 30px;
@@ -169,16 +176,30 @@ li {
 .playerData{
   margin: 0px;
   padding: 0px;
+  /*
   background-color: lightgrey;
   border-radius: 15px;
+  */
 }
 .playerData li{
   display: inline-block;
 }
 
 .playerData .playerBanner{
+  width: 90%;
+  margin-left: 5%;
   border: 1px solid blue;
   border-radius: 15px;
+  background-color: lightsteelblue;
+  /*
+
+  */
+}
+.dragndrop{
+  cursor:grab;
+}
+.dragndrop:active{
+  cursor:grabbing;
 }
 .playerBanner h1{
   display: inline;

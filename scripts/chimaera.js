@@ -51,7 +51,7 @@ function BuildToonGUI(toonJSON){
 
 		$toons.append($("<li>", {
 			id: _toon.base_id,
-			class :"toonProfile",
+			class :"toonProfile dragndrop",
 			value: _toon.base_id
 		}).append(
 			_img,
