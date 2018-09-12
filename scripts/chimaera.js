@@ -66,7 +66,7 @@ function BuildToonGUI(toonJSON){
 }
 
 function UpdatePhaseTeams(){
-      var $teams = $(".phaseTeams").children();
+      var $teams = $(".phaseTeams").children("ul");
       $("#numTeams").text($teams.length);
       var _val;
       if($teams.length > 0){
@@ -75,6 +75,20 @@ function UpdatePhaseTeams(){
       	_val = "N/A";
       }
       $("#numMin").text(_val);
+
+      $("#guildTeams>>li>.inuse").hide();
+
+      $teams.each(function(){
+      	var _playerID = $(this).attr("name");
+      	$(this).children("li").each(function(){
+      		var _toonID = $(this).attr("name");
+      		updateToonInUse(_toonID, _playerID);
+      	});   	
+      });
+}
+
+function updateToonInUse(ToonID, PlayerID){
+	$("#guildTeams>."+PlayerID+">li."+ToonID+">.inuse").show();
 }
 
 function updateFiltered(){
@@ -108,5 +122,7 @@ function updateFiltered(){
     $("#teamBuilder").children().each(function(){
         updateToonCount($(this));
     });
+    
+	UpdatePhaseTeams();
 }
 //

@@ -6,7 +6,8 @@ function guildBuildMemberTeams(JSON, ToonObject){
 	var imageDom = ToonObject.children().first();
 
 	var $template =  $("<li>", {
-		class: "horizList playerToon toonProfile " + toonID
+		class: "horizList playerToon toonProfile " + toonID,
+		name: toonID
 	}).append(
 		imageDom.clone().addClass("playerToon")
 	);
@@ -36,8 +37,8 @@ function guildBuildMemberTeamRow(PlayerObj){
 	if(!guildObjects.hasOwnProperty(PlayerName)){
 
 		guildObjects[PlayerName] = $("<ul>", {
-			id: PlayerName,
-			class: "horizList trimmed playerData " + $(".GuildData.selected").attr("value")
+			class: PlayerName + " horizList trimmed playerData " + $(".GuildData.selected").attr("value"),
+			name: PlayerName
 
 		}).append(
 			$("<div>", {class : "playerBanner dragndrop", value:"Banner"}).append(
@@ -60,6 +61,10 @@ function guildBuildMemberToon($Template, ToonData){
 			$("<img>", {
 				src: 'images/borders/gear-icon-g' + ToonData.gear_level + ".svg",
 				class: "playerGear"
+			}),
+			$("<img>", {
+				src: 'images/inuse.png',
+				class: "inuse hiddenData"
 			}),
 			 $("<div>", {class:"gearLevel hiddenData", text: ToonData.gear_level}),
 			 $("<div>", {class:"starLevel hiddenData", text: ToonData.rarity}),

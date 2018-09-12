@@ -21,9 +21,11 @@ li {
   min-width: 940px;
   height: 100%;
   text-align: center;
-  border: 1px solid red;
   float: left;
   margin-left: 10px;
+  /*
+  border: 1px solid red;
+  */
 }
 
 #banner{
@@ -120,23 +122,27 @@ li {
 .teaming{
   float: left;
   margin:0;
-  border: 1px solid blue;
   overflow-y: scroll;
   min-width: 450px;
   width: 45%;
   height: 90%;
   text-align: left;
+  padding: 10px;
+  color: white;
+  /*
+  border: 1px solid blue;
+
+  */
 
 }
 #guildTeams{
   /*height: 90%;
   */
-  padding: 10px;
-  color: white;
 }
 .builder .toonProfile{
   margin: 0px;
   border: 2px solid transparent;/**/
+
 }
 .toonProfile{
   margin: 13px 10px 10px 10px;
@@ -147,6 +153,15 @@ li {
   border: 1px solid red;
   */
   position: relative;
+}
+.toonProfile .inuse{
+  width: 50%;
+  height: 50%;
+
+  border-radius: 0px;
+  -webkit-transform: translate(50%, 35%);
+  transform: translate(50%, 35%);
+
 }
 .placeholder{
   border: 2px dashed grey !important;
@@ -181,6 +196,10 @@ li {
   border-radius: 15px;
   */
 }
+#container .placeholder{
+  height: 125px;
+
+}
 .playerData li{
   display: inline-block;
 }
@@ -188,9 +207,9 @@ li {
 .playerData .playerBanner{
   width: 90%;
   margin-left: 5%;
-  border: 1px solid blue;
+  border: 1px solid lightgrey;
   border-radius: 15px;
-  background-color: lightsteelblue;
+  background-color: darkgrey;
   /*
 
   */
@@ -328,8 +347,15 @@ li {
   overflow-y: none;
   display:block;
 }
+
+.phaseBuilder .phaseBanner{
+  background-color: LightSteelBlue;
+  padding: 3px;
+  text-align: center;
+  color: black;
+}
 .phaseBuilder .phaseBanner label{
- border: 1px solid black;
+ /*border: 1px solid black;*/
  padding: 5px;
 }
 .phaseBuilder .phaseBanner div{
@@ -340,15 +366,20 @@ li {
   width: 100%; 
   height: 5%;
   font-size: 16pt;
-  background-color: white;
   z-index: 1;
+  /*
+  background-color: white;
+
+  */
 }
 .phaseBuilder .phaseTeams{
   margin-top: 5px;
   height: auto;
   min-height: 75%;
-  border: 1px solid green;
+  background-color: darkgrey;
+  border: 1px solid dimgrey;
   overflow-y: scroll;
+  border-radius: 5px;
 }
 #credits{
   font-size:8pt;
@@ -364,5 +395,8 @@ padding: 10px;
   height: 2em;
   background-color: lightgrey;
   float:left;
+  border: 2px solid black;
+  border-left: 0;
+  border-right: 0;
 
 }

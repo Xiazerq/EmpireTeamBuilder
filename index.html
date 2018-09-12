@@ -92,10 +92,11 @@ $( function() {
   });
   
   $( "#guildTeams, .phaseTeams").sortable({
+    placeholder: "placeholder trimmed playerData",
     connectWith: ".phaseTeams",
     handle: ".playerBanner",
     receive: function(event, ui){
-      var $item = $(ui.item)
+      var $item = $(ui.item);
       $close = $("<div>",{class: "closeTeam", text:"X"});
       var $cloned = $item.clone();
 
@@ -103,7 +104,7 @@ $( function() {
       $close.click(function(){
         $cloned.remove();
         UpdatePhaseTeams();
-      })
+      });
       $item.after($cloned);
       $(ui.sender).sortable('cancel');
       UpdatePhaseTeams();
@@ -176,7 +177,7 @@ $( function() {
     <div id="container">
       <div id="guildTeams" class="teaming"></div>
       <div class="phaseBuilder teaming">
-        <div class="phaseBanner">
+        <div class="phaseBanner trimmed">
           <h1>Phase Data</h1>
           <label>Number of Teams: <div id="numTeams" class="data"></div></label>
           <label>Damage % Per Team: <div id="numMin" class="data"></div></label>
