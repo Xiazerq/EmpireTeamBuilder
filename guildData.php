@@ -11,7 +11,10 @@
 		for($x = 0; $x < count($guildData->players); $x++){
 			$player = $guildData->players[$x]->data;
 
-				$player->name = preg_replace('/\s+/', "_", $player->name);
+				$displayName = $player->name;
+				$player->name = preg_replace('/\s+/', "_", $displayName);
+				$player->display = $displayName;
+
     			unset($player->ship_galactic_power);
     			unset($player->arena_leader_base_id);
     			unset($player->level); 
@@ -19,14 +22,14 @@
     			unset($player->arena_rank);
 			//$toons = $guildData->players[$x]->units;
 
-			$memToon = guildData_MemberToon($toonName, $guildData->players[$x]->units);
-
-			
-
-				$returnData[] = array(	'player' => $player,
-										'toon' => $memToon
-
-				);
+    		if($toonName != false){
+				$memToon = guildData_MemberToon($toonName, $guildData->players[$x]->units);
+			}else{
+				$memToon = false;
+			}
+			$returnData[] = array(	'player' => $player,
+									'toon' => $memToon
+			);
 			//if($memToon != false){}
 
 		}
@@ -66,11 +69,33 @@
 
     }
 
+    function getPath($guildName){
+		$path1 = "guildData/1_".$guildName.'.json';
+
+		$path2 = "guildData/2_".$guildName.'.json';
+		
+		
+		if (!file_exists($path1)) {
+    		return $path1;
+		}else if(!file_exists($path2)){
+			return $path2;
+		}else{
+			if(filemtime($path1) < filemtime($path2)){
+				return $path1;
+			}else{
+				return $path2;
+			}
+		}
+	}
+
 	//require_once('assets/simple_html_dom.php');
 	$toonName =  ($_GET['character']);
 	$guildName = ($_GET['guild']);
 
-	$string = file_get_contents("guildData/NEW_".$guildName.".json");
+	$pathName = getPath($guildName);
+
+	//$string = file_get_contents("guildData/NEW_".$guildName.".json");
+	$string = file_get_contents(pathName);
 	$guildData = json_decode($string);
 	
 	if($guildData === null) {
@@ -78,10 +103,18 @@
 		echo "{ ERROR : 'ERROR: JSON not valid' }";
 	 // $ob is null because the json cannot be decoded
 	}else{
-		guildData_Organize($guildData, $toonName, $guildName);
+		if($toonName != false){
+			guildData_Organize($guildData, $toonName, $guildName);
+
+		}else{
+
+			guildData_Organize($guildData, false, $guildName);
+		}
 		//file_put_contents("guildData/".$guildName.'.json', $encodedJSON);
 
 	}
+	unset($guildData);
+	unset($string);
 	//var_dump($guildData->players[0]->data)
 
 /** /

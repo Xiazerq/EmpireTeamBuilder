@@ -5,6 +5,7 @@ function guildBuildMemberTeams(JSON, ToonObject){
 	var toonID = ToonObject.attr("value");
 	var imageDom = ToonObject.children().first();
 
+	//updateFilteredPlayers(JSON);
 	var $template =  $("<li>", {
 		class: "horizList playerToon toonProfile " + toonID,
 		name: toonID

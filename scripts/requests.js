@@ -2,70 +2,33 @@ $(document).ready(function(){
     requestToons();
     var request;
     $(".GuildData").click(function(event){
-        /*
-        event.preventDefault();
 
-        if (request) {
-            request.abort();
-        }
-        */
+        var _guild = requestSelectedGuild();
+        var _newGuild = $(this).attr("value");
+
+        if(typeof(_guild) != "undefined" && _guild.localeCompare(_newGuild) == 0) return;
+
         $("#banner .selected").removeClass("selected");
         $(this).addClass("selected");
-        var thisGuild = $(this).attr("value");
 
         $(".playerData").hide();
-        $("." + thisGuild ).show();
+        $("." + _newGuild ).show();
 
-        $("#teamBuilder").children().each(function(){
+        var $team = $("#teamBuilder").children();
+
+        //requestJSON("guildData.php", { character: false, guild: requestSelectedGuild()}, updateFilteredPlayers, false);
+        
+        $team.each(function(){
             var _item = $(this);
             requestGuildToons(_item)
             //BuildGuildTeams(_item);
         });
 
         sortGuildTeams();
-  /*
-        var _url = "guildData/"+ thisGuild +".json"
-
-        request = $.ajax({
-            url: _url,
-            contentType: "application/json",
-            data: "JSON"
-        });
-
-        request.done(function (response, textStatus, jqXHR){
-            guildToons = JSON.parse(response);
-            //guildToons = response;
-
-            BuildAllMembers();
-          
-            $("#teamBuilder").children().each(function(){
-                var _item = $(this);
-
-                BuildGuildTeams(_item);
-                //Update counter
-
-
-                //BuildGuildTeams(_item.attr("value"), _item.children().first());
-                //$("#guildTeams ul.chimaera li.REYJEDITRAINING").length
-            });
-
-            sortGuildTeams();
-           
-        });
-
-        request.fail(function (jqXHR, textStatus, errorThrown){
-            console.error(
-                "The following error occurred: "+
-                textStatus, errorThrown
-            );
-
-            $("#output").html("Error Getting Data");
-        });
-*/
+  
     });
-    //});
+
     $("#chimaera").click();
-    //new Clipboard('.clipBoard');
 });
 function requestSelectedGuild(){
     return $("#banner .selected").attr("value");
@@ -122,8 +85,8 @@ function requestToons(){
             //console.log(response);
             //BuildAllMembers();
 
-             BuildToonGUI(JSON.parse(response));
-            //BuildToonGUI(response);
+            //BuildToonGUI(JSON.parse(response));
+            BuildToonGUI(response);
             //$("#output").html(response);
             //$(".clipBoard").show(true);
         });

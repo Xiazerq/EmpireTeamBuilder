@@ -94,18 +94,19 @@ function updateToonInUse(ToonID, PlayerID){
 function updateFiltered(){
 	var starMin = parseInt($("#starFilter").val(), 10);
 	var gearMin = parseInt($("#gearFilter").val(), 10);
+	var player = $("#playerFilter").val();
 
     var thisGuild = $("#banner .selected").attr("value");
 
-    var _teams = "#guildTeams>ul." + thisGuild + ">li";
-    $(_teams).parent().show();
+    var _teams = "#guildTeams>ul." + thisGuild;
+    $(_teams).show();
 
     if(starMin > 0){
-		$(_teams + ">.star" + starMin + ".star-inactive").parent().parent().hide();
+		$(_teams + ">li>.star" + starMin + ".star-inactive").parent().parent().hide();
 	}
 
 	if(gearMin > 0){
-	  $(_teams + ":visible>.gearLevel").each(function(){
+	  $(_teams + ">li:visible>.gearLevel").each(function(){
 	  		var $this = $(this);
 	  		var _gear = parseInt($this.text(), 10);
 
@@ -113,6 +114,9 @@ function updateFiltered(){
 	  		$parent.toggle(_gear >= gearMin && $parent.is(":visible"));
 	  });
 
+	}
+	if(player.localeCompare("0") != 0){
+		$(_teams + ":not(." + player +")").hide();
 	}
 
 	if(starMin > 0 || gearMin > 0){
@@ -124,5 +128,25 @@ function updateFiltered(){
     });
     
 	UpdatePhaseTeams();
+}
+
+function updateFilteredPlayers(JSON){
+
+    $("#playerFilter>.playerName").each().remove();
+
+    JSON.sort(function compare(a,b) {
+		  return b.player.name.localeCompare(a.player.name)
+	});
+
+	if($("#playerFilter").children().length < 2){
+		for (var x = JSON.length - 1; x >= 0; x--) {
+			$("#playerFilter").append($("<option>",{
+				class: "playerName",
+				value: JSON[x].player.name,
+				text: JSON[x].player.name
+			}))
+			//JSON[x].player
+		};
+	}
 }
 //

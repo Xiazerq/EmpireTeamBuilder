@@ -1,5 +1,24 @@
 <?php
 
+	function getPath($guildName){
+		$path1 = "guildData/1_".$guildName.'.json';
+
+		$path2 = "guildData/2_".$guildName.'.json';
+		
+		
+		if (!file_exists($path1)) {
+    		return $path1;
+		}else if(!file_exists($path2)){
+			return $path2;
+		}else{
+			if(filemtime($path1) < filemtime($path2)){
+				return $path1;
+			}else{
+				return $path2;
+			}
+		}
+	}
+
 	$guilds = array(
 		"chimaera" => "25666",
 		"vengeance" => "35846",
@@ -18,7 +37,7 @@
 		//https://swgoh.gg/api/guilds/25666/units/	OLD URL
 		//https://swgoh.gg/api/guild/25666/			NEW URL
 		$url = "https://swgoh.gg/api/guild/". $guildID;
-		echo "url:(".$url.")";
+		echo "<br>url:(".$url.")<br>";
 		$encodedJSON = file_get_contents($url);
 
 		$data = json_decode($encodedJSON);
@@ -26,8 +45,13 @@
 			echo "ERROR: JSON not valid for ".$guildName;
 		 // $ob is null because the json cannot be decoded
 		}else{
-			file_put_contents("guildData/NEW_".$guildName.'.json', $encodedJSON);
+
+			$pathName = getPath($guildName);
+			echo $pathName;
+			//file_put_contents("guildData/NEW_".$guildName.'.json', $encodedJSON);
+			file_put_contents($pathName, $encodedJSON);
 		}
+		unset($data);
 	}
 
 	//https://swgoh.gg/api/characters/
