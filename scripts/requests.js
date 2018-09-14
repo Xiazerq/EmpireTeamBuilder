@@ -11,12 +11,16 @@ $(document).ready(function(){
         $("#banner .selected").removeClass("selected");
         $(this).addClass("selected");
 
-        $(".playerData").hide();
+        //$(".playerData").hide();
+        $("." + _guild).hide();
+
+
+        var _newGuild = requestSelectedGuild();
         $("." + _newGuild ).show();
 
         var $team = $("#teamBuilder").children();
 
-        //requestJSON("guildData.php", { character: false, guild: requestSelectedGuild()}, updateFilteredPlayers, false);
+        requestJSON("guildData.php", { character: false, guild: requestSelectedGuild(true)}, updateFilteredPlayers, false);
         
         $team.each(function(){
             var _item = $(this);
@@ -30,11 +34,11 @@ $(document).ready(function(){
 
     $("#chimaera").click();
 });
-function requestSelectedGuild(){
-    return $("#banner .selected").attr("value");
+function requestSelectedGuild(asRequest = false){
+    return (!asRequest ? "guild_": "") + $("#banner .selected").attr("value");
 }
 function requestGuildToons($toon){
-    requestJSON("guildData.php", { character: $toon.attr("value"), guild: requestSelectedGuild()}, guildBuildMemberTeams, $toon);
+    requestJSON("guildData.php", { character: $toon.attr("value"), guild: requestSelectedGuild(true)}, guildBuildMemberTeams, $toon);
 }
 
 function requestJSON(url, data, callback, passThroughData){

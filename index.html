@@ -75,7 +75,7 @@ $( function() {
 
       //$(".")
 
-      var thisGuild = $("#banner .selected").attr("value");
+      var thisGuild = requestSelectedGuild();//$("#banner .selected").attr("value");
       //$("#guildTeams ul.chimaera li.B2SUPERBATTLEDROID").length
       setTimeout(function(){
         $("#guildTeams>ul." + thisGuild + ">li." + _item.attr("value")).each(function(){
@@ -99,6 +99,7 @@ $( function() {
       var $item = $(ui.item);
       $close = $("<div>",{class: "closeTeam", text:"X"});
       var $cloned = $item.clone();
+      $cloned.find("li>.inuse").remove();
 
       $cloned.children(".playerBanner").prepend($close);
       $close.click(function(){
@@ -140,7 +141,6 @@ $( function() {
     <div id="nemesis" class="GuildData" value="nemesis">Nemesis</div>
     <div id="devastator" class="GuildData" value="devastator">Devastator</div>
     <div id="output"></div>
-    <div id="credits">Built by Xiazer#7965</div>
   </div>
     <div id="toonsFilter" class="filtering">
        <span>Filter:</span>
@@ -181,8 +181,8 @@ $( function() {
         <option value="11">11</option>
         <option value="12">12</option>
       </select>
-      <span>Member:(coming soon!)</span>
-       <select id="playerFilter" disabled="disabled">
+      <span>Member:</span>
+       <select id="playerFilter">
         <option value="0">All Players</option>
       </select>
     </div>
@@ -199,5 +199,6 @@ $( function() {
         </div>
       </div>
     </div>
+    <div id="credits">Built by Xiazer#7965</div>
 </body>
 </html>

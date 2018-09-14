@@ -38,7 +38,7 @@ function guildBuildMemberTeamRow(PlayerObj){
 	if(!guildObjects.hasOwnProperty(PlayerName)){
 
 		guildObjects[PlayerName] = $("<ul>", {
-			class: PlayerName + " horizList trimmed playerData " + $(".GuildData.selected").attr("value"),
+			class: PlayerName + " horizList trimmed playerData " + requestSelectedGuild(),
 			name: PlayerName
 
 		}).append(

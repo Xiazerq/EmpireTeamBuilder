@@ -136,7 +136,7 @@ function updateFiltered(){
 	var gearMin = parseInt($("#gearFilter").val(), 10);
 	var player = $("#playerFilter").val();
 
-    var thisGuild = $("#banner .selected").attr("value");
+    var thisGuild = requestSelectedGuild();//$("#banner .selected").attr("value");
 
     var _teams = "#guildTeams>ul." + thisGuild;
     $(_teams).show();
@@ -181,16 +181,16 @@ function updateToonsFilteredGUI(){
 
 function updateFilteredPlayers(JSON){
 
-    $("#playerFilter>.playerName").each().remove();
+    //$("#playerFilter>.playerName." + requestSelectedGuild()).each().hide();
 
     JSON.sort(function compare(a,b) {
 		  return b.player.name.localeCompare(a.player.name)
 	});
 
-	if($("#playerFilter").children().length < 2){
+	if($("#playerFilter>option." + requestSelectedGuild()).length < 2){
 		for (var x = JSON.length - 1; x >= 0; x--) {
 			$("#playerFilter").append($("<option>",{
-				class: "playerName",
+				class: "playerName " + requestSelectedGuild(),
 				value: JSON[x].player.name,
 				text: JSON[x].player.name
 			}))
