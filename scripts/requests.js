@@ -85,8 +85,8 @@ function requestToons(){
             //console.log(response);
             //BuildAllMembers();
 
-            //BuildToonGUI(JSON.parse(response));
-            BuildToonGUI(response);
+            BuildToonGUI(JSON.parse(response));
+            //BuildToonGUI(response);
             //$("#output").html(response);
             //$(".clipBoard").show(true);
         });

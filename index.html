@@ -115,6 +115,9 @@ $( function() {
   $( "#teamsFilter>select").on("change", function(){
     updateFiltered();
   });
+  $( "#toonsFilter>select").on("change", function(){
+    updateToonsFilteredGUI();
+  });
   //
 });
 </script>
@@ -139,7 +142,12 @@ $( function() {
     <div id="output"></div>
     <div id="credits">Built by Xiazer#7965</div>
   </div>
-    <div id="toonsFilter" class="filtering"></div>
+    <div id="toonsFilter" class="filtering">
+       <span>Filter:</span>
+        <select id="toonsCatFilter">
+          <option value="0">All</option>
+        </select>
+    </div>
     <ul id="toonSelector" class="builder trimmed"></ul>
     <!--
   

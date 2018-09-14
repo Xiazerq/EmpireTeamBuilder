@@ -95,7 +95,7 @@
 	$pathName = getPath($guildName);
 
 	//$string = file_get_contents("guildData/NEW_".$guildName.".json");
-	$string = file_get_contents(pathName);
+	$string = file_get_contents($pathName);
 	$guildData = json_decode($string);
 	
 	if($guildData === null) {

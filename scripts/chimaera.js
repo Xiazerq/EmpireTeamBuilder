@@ -2,6 +2,8 @@ var guildObjects = {};
 
 var guildToons;
 
+var toonFilters = {keys: {}, values: []};
+
 function updateToonCount(ToonObj){
 	
 	var thisGuild = requestSelectedGuild();
@@ -49,22 +51,60 @@ function BuildToonGUI(toonJSON){
 				  class: "blankName"
 				});
 
+		var _filterClasses = updateToonFilters(_toon);
+
 		$toons.append($("<li>", {
 			id: _toon.base_id,
-			class :"toonProfile dragndrop",
+			class :"toonProfile dragndrop " + _filterClasses,
 			value: _toon.base_id
 		}).append(
 			_img,
 			$("<div>", {class:"level"}),
-			$("<div>", {class:"zetas"}),
-			$("<div>", {class:"alignment hiddenData"}).text(_toon.alignment),
-			$("<div>", {class:"role hiddenData"}).text(_toon.role)
+			$("<div>", {class:"zetas"})
 		)); //.draggable()
+	}
 
+	//updateToonFiltersGUI();
+	 toonFilters.values.sort(function compare(a,b) {
+		  return b.value.localeCompare(a.value);
+	});
+	for (var i = toonFilters.values.length - 1; i >= 0; i--) {
+
+		//if($("#playerFilter").children().length < 2){
+		$("#toonsCatFilter").append($("<option>",{
+			class: "toonFilter",
+			value: toonFilters.values[i].value,
+			text: toonFilters.values[i].display
+		}))
+			//JSON[x].player
 	}
 
 }
+function updateToonFilters(ToonObj){
+	var _filterClasses = "";
+	var _prefix = "";
 
+	for(var _cat in ToonObj.categories){
+		_filterClasses += _prefix + updateFilterList(ToonObj.categories[_cat]) + " ";
+	}
+
+	_filterClasses += _prefix + updateFilterList(ToonObj.alignment)  + " ";
+	_filterClasses += _prefix + updateFilterList(ToonObj.role)  + " ";
+
+	return _filterClasses;
+}
+function updateFilterList(rawFilter){
+	var _cleaned = updateRawStringSpaces(rawFilter);
+	if(!toonFilters.keys.hasOwnProperty(_cleaned)){
+		toonFilters.keys[_cleaned] = toonFilters.values.length;
+		toonFilters.values.push({value: _cleaned, display: rawFilter});
+	}
+
+	return _cleaned;
+}
+function updateRawStringSpaces(rawString){
+	return "filter_" + rawString.replace(/\s+/, "_").toLowerCase();
+}
 function UpdatePhaseTeams(){
       var $teams = $(".phaseTeams").children("ul");
       $("#numTeams").text($teams.length);
@@ -120,7 +160,7 @@ function updateFiltered(){
 	}
 
 	if(starMin > 0 || gearMin > 0){
-    	$(_teams + ">.lock").parent().parent().hide();
+    	$(_teams + ">li>.lock").parent().parent().hide();
     }
     //updateToonCount(ToonObject);
     $("#teamBuilder").children().each(function(){
@@ -128,6 +168,15 @@ function updateFiltered(){
     });
     
 	UpdatePhaseTeams();
+}
+
+function updateToonsFilteredGUI(){
+	var _catFilter = $("#toonsCatFilter").val();
+
+	$("#toonSelector>li:hidden").show();
+	if(_catFilter.localeCompare("0") != 0){
+		$("#toonSelector>:not(."+ _catFilter + ")").hide();
+	}
 }
 
 function updateFilteredPlayers(JSON){
