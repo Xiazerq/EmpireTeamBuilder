@@ -43,7 +43,7 @@ function guildBuildMemberTeamRow(PlayerObj){
 
 		}).append(
 			$("<div>", {class : "playerBanner dragndrop", value:"Banner"}).append(
-				$("<h1>").text(PlayerName),
+				$("<h1>").append($("<a>", { href: 'https://swgoh.gg/' + PlayerObj.url, target: "_blank", text: PlayerObj.display})),
 				$("<h1>",{class:"TotalPower", value: "0"}).text(0)));
 		
 		$("#guildTeams").append(guildObjects[PlayerName]);
