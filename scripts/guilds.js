@@ -59,10 +59,12 @@ function guildBuildMemberToon($Template, ToonData){
 	if(ToonData){
 		_power = ToonData.power;
 		$toon.attr("value", _power).append(
-			$("<img>", {
-				src: 'images/borders/gear-icon-g' + ToonData.gear_level + ".svg",
-				class: "playerGear"
-			}),
+			$("<a>", { href: 'https://swgoh.gg' + ToonData.url, target: "_blank"}).append(
+				$("<img>", {
+					src: 'images/borders/gear-icon-g' + ToonData.gear_level + ".svg",
+					class: "playerGear"
+				})
+			),
 			$("<img>", {
 				src: 'images/inuse.png',
 				class: "inuse hiddenData"
