@@ -8,12 +8,12 @@ CREATE TABLE EmpireGuild
 );
 
 insert into EmpireGuild (EmpGuiId, EmpGuiDisplayName, EmpGuiColor_Dec) values (25666,'Chimaera',16007746);
-insert into EmpireGuild (EmpGuiId, EmpGuiDisplayName, EmpGuiColor_Dec) values (26170,'Devastator',42988);
-insert into EmpireGuild (EmpGuiId, EmpGuiDisplayName, EmpGuiColor_Dec) values (26453,'Eclipse',26453);
-insert into EmpireGuild (EmpGuiId, EmpGuiDisplayName, EmpGuiColor_Dec) values (44009,'Executor',44009);
-insert into EmpireGuild (EmpGuiId, EmpGuiDisplayName, EmpGuiColor_Dec) values (33287,'Nemesis',33287);
-insert into EmpireGuild (EmpGuiId, EmpGuiDisplayName, EmpGuiColor_Dec) values (15981,'Perilous',15981);
-insert into EmpireGuild (EmpGuiId, EmpGuiDisplayName, EmpGuiColor_Dec) values (5973,'Predator',5973);
+insert into EmpireGuild (EmpGuiId, EmpGuiDisplayName, EmpGuiColor_Dec) values (26170,'Devastator',0);
+insert into EmpireGuild (EmpGuiId, EmpGuiDisplayName, EmpGuiColor_Dec) values (26453,'Eclipse',0);
+insert into EmpireGuild (EmpGuiId, EmpGuiDisplayName, EmpGuiColor_Dec) values (44009,'Executor',0);
+insert into EmpireGuild (EmpGuiId, EmpGuiDisplayName, EmpGuiColor_Dec) values (33287,'Nemesis',0);
+insert into EmpireGuild (EmpGuiId, EmpGuiDisplayName, EmpGuiColor_Dec) values (15981,'Perilous',0);
+insert into EmpireGuild (EmpGuiId, EmpGuiDisplayName, EmpGuiColor_Dec) values (5973,'Predator',0);
 insert into EmpireGuild (EmpGuiId, EmpGuiDisplayName, EmpGuiColor_Dec) values (26040,'Ravager',65280);
 insert into EmpireGuild (EmpGuiId, EmpGuiDisplayName, EmpGuiColor_Dec) values (26384,'Reaper',12632256);
 insert into EmpireGuild (EmpGuiId, EmpGuiDisplayName, EmpGuiColor_Dec) values (36289,'Vanguard',65535);
