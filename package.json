@@ -1,0 +1,30 @@
+{
+  "name": "EmpireTeamBuilder",
+  "version": "1.0.0",
+  "description": "Uploaded a bunch of code, there's a ton of dead files in here too, so ignore those?",
+  "main": "index.js",
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "jquery-ui": "^1.12.1",
+    "jquery-ui-touch-punch-amd": "^1.0.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xiazerq/EmpireTeamBuilder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Xiazerq/EmpireTeamBuilder/issues"
+  },
+  "homepage": "https://github.com/Xiazerq/EmpireTeamBuilder#readme"
+}
