@@ -1,7 +1,7 @@
 //var guildObjects = {};
 var lastLoaded = false;
 
-function guildBuildMemberTeams(JSON, ToonObject){
+window.guildBuildMemberTeams = function(JSON, ToonObject){
 	var toonID = ToonObject.attr("value");
 	var imageDom = ToonObject.children().first();
 
@@ -32,7 +32,7 @@ function guildBuildMemberTeams(JSON, ToonObject){
      $( "#teamBuilder" ).trigger('sortupdate');
 }
 
-function guildBuildMemberTeamRow(PlayerObj){
+window.guildBuildMemberTeamRow = function(PlayerObj){
 	var PlayerName = PlayerObj.name;
 
 	if(!guildObjects.hasOwnProperty(PlayerName)){
@@ -51,7 +51,7 @@ function guildBuildMemberTeamRow(PlayerObj){
 
 }
 
-function guildBuildMemberToon($Template, ToonData){
+window.guildBuildMemberToon = function($Template, ToonData){
 	var $toon = $Template.clone();
 
 	//If the toon data is "toon": false, which will return if the member doesn't have it unlocked
@@ -102,7 +102,7 @@ function guildBuildMemberToon($Template, ToonData){
 	return $toon;
 }
 
-function guildUpdateTeamPower($PlayerObject, AddPower){
+window.guildUpdateTeamPower = function($PlayerObject, AddPower){
 	var $power = $PlayerObject.children(".playerBanner").children(".TotalPower");
 	var _totalPower = parseInt($power.attr("value"), 10);
 	var _toonPower = AddPower

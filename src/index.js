@@ -1,3 +1,18 @@
+import 'jquery';
+import 'jquery-ui';
+import 'jquery-ui/ui/core';
+import 'jquery-ui/ui/widgets/draggable';
+import 'jquery-ui/ui/widgets/droppable';
+import 'jquery-ui/ui/disable-selection';
+import 'jquery-ui/ui/widgets/sortable';
+
+import 'jquery-ui-touch-punch-amd/jquery.ui.touch-punch.min';
+
+import './swgohDirect.css';
+import './guilds.js';
+import './update.js';
+import './requests.js';
+
 $( function() {
   $( "#toonSelector, #teamBuilder" ).sortable({
         connectWith: ".builder",

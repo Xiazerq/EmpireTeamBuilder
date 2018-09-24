@@ -34,14 +34,14 @@ $(document).ready(function(){
 
     $("#chimaera").click();
 });
-function requestSelectedGuild(asRequest = false){
+window.requestSelectedGuild = function(asRequest = false){
     return (!asRequest ? "guild_": "") + $("#banner .selected").attr("value");
 }
-function requestGuildToons($toon){
+window.requestGuildToons = function($toon){
     requestJSON("guildData.php", { character: $toon.attr("value"), guild: requestSelectedGuild(true)}, guildBuildMemberTeams, $toon);
 }
 
-function requestJSON(url, data, callback, passThroughData){
+window.requestJSON = function(url, data, callback, passThroughData){
     var request;
 
     if (request) {
@@ -69,7 +69,7 @@ function requestJSON(url, data, callback, passThroughData){
     });
 }
 
-function requestToons(){
+window.requestToons = function(){
    var request;
 
     //$("#getAPIJSON").click(function(event){
@@ -80,7 +80,7 @@ function requestToons(){
         }
 
         request = $.ajax({
-            url: "scripts/toons.json",
+            url: "../scripts/toons.json",
             contentType: "application/json",
             datatype: "JSON"
         });

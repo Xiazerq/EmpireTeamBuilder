@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+</script>
+</head>
+<body>
+  <script src="main.js"></script>
+  <div id="banner">
+    <!-- <label>Guild ID</label>
+    <input type="text" />
+    <button id="getGuildJSON">Get Guild</button>
+  --><h1> EMPÎRE ALLÎANCE </h1>
+    <div id="chimaera" class="GuildData" value="chimaera">Chimaera</div>
+    <div id="vanguard" class="GuildData" value="vanguard">Vanguard</div>
+    <div id="vengeance" class="GuildData" value="vengeance">Vengeance</div>
+    <div id="predator" class="GuildData" value="predator">Predator</div>
+    <div id="execut0r" class="GuildData" value="execut0r">Executor</div>
+    <div id="reaper" class="GuildData" value="reaper">Reaper</div>
+    <div id="ravager" class="GuildData" value="ravager">Ravager</div>
+    <div id="eclipse" class="GuildData" value="eclipse">Eclipse</div>
+    <div id="perilous" class="GuildData" value="perilous">Perilous</div>
+    <div id="nemesis" class="GuildData" value="nemesis">Nemesis</div>
+    <div id="devastator" class="GuildData" value="devastator">Devastator</div>
+    <div id="output"></div>
+  </div>
+    <div id="toonsFilter" class="filtering">
+       <span>Filter:</span>
+        <select id="toonsCatFilter">
+          <option value="0">All</option>
+        </select>
+    </div>
+    <ul id="toonSelector" class="builder trimmed"></ul>
+    <!--
+  
+  -->
+    <ul id="teamBuilder" class="builder trimmed"></ul>
+    <div id="teamsFilter" class="filtering">
+      <span>Stars Min:</span>
+      <select id="starFilter">
+        <option value="0">Any</option>
+        <option value="1">1*</option>
+        <option value="2">2*</option>
+        <option value="3">3*</option>
+        <option value="4">4*</option>
+        <option value="5">5*</option>
+        <option value="6">6*</option>
+        <option value="7">7*</option>
+      </select>
+      <span>Gear Min:</span>
+      <select id="gearFilter">
+        <option value="0">Any</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>
+      <span>Member:</span>
+       <select id="playerFilter">
+        <option value="0">All Players</option>
+      </select>
+    </div>
+    <div id="container">
+      <div id="guildTeams" class="teaming"></div>
+      <div class="phaseBuilder teaming">
+        <div class="phaseBanner trimmed">
+          <h1>Phase Data</h1>
+          <label>Number of Teams: <div id="numTeams" class="data"></div></label>
+          <label>Damage % Per Team: <div id="numMin" class="data"></div></label>
+          <button id="printTeams" style="display:none">Print</button>
+        </div>
+        <div class="phaseTeams">
+        </div>
+      </div>
+    </div>
+    <div id="credits">Built by Xiazer#7965</div>
+</body>
+</html>

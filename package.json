@@ -4,17 +4,21 @@
   "description": "Uploaded a bunch of code, there's a ton of dead files in here too, so ignore those?",
   "main": "index.js",
   "dependencies": {
+    "expose-loader": "^0.7.5",
     "jquery": "^3.3.1",
     "jquery-ui": "^1.12.1",
     "jquery-ui-touch-punch-amd": "^1.0.1"
   },
   "devDependencies": {
+    "css-loader": "^1.0.0",
+    "file-loader": "^2.0.0",
+    "style-loader": "^0.23.0",
     "webpack": "^4.19.1",
     "webpack-cli": "^3.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "webpack"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
