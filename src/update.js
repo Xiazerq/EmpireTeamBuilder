@@ -1,8 +1,10 @@
-var guildObjects = {};
+import BlankToon from './images/blank-character.png';
 
-var guildToons;
+window.guildObjects = {};
 
-var toonFilters = {keys: {}, values: []};
+window.guildToons;
+
+window.toonFilters = {keys: {}, values: []};
 
 window.updateToonCount = function(ToonObj){
 	
@@ -39,15 +41,16 @@ window.sortGuildTeams = function(){
 }
 
 window.BuildToonGUI = function(toonJSON){
-	$toons = $("#toonSelector");
+	var $toons = $("#toonSelector");
 
 	//for(var _ID in toonJSON){
 	for(var x = 0; x < toonJSON.length; x++){
 		var _toon = toonJSON[x];
 
 		var _img = $('<img>', { 
-				  src: _toon.image.replace('//swgoh.gg/static/img/assets/', '../images/profiles/'),
+				  src: _toon.image.replace('//swgoh.gg/static/img/assets/', './profiles/'),
 				  alt: _toon.name,
+				  onerror: "onToonImageError(this)",
 				  class: "blankName"
 				});
 
@@ -80,6 +83,11 @@ window.BuildToonGUI = function(toonJSON){
 	}
 
 }
+window.onToonImageError = function(image){
+	image.onerror = "";
+    image.src = BlankToon;
+    return true;
+}
 window.updateToonFilters = function(ToonObj){
 	var _filterClasses = "";
 	var _prefix = "";
@@ -106,7 +114,7 @@ window.updateRawStringSpaces = function(rawString){
 	return "filter_" + rawString.replace(/\s+/, "_").toLowerCase();
 }
 window.UpdatePhaseTeams = function(){
-      var $teams = $(".phaseTeams").children("ul");
+      var $teams = $(".phaseTeams>ul." + requestSelectedGuild()); //.children("ul");
       $("#numTeams").text($teams.length);
       var _val;
       if($teams.length > 0){

@@ -59,7 +59,8 @@ $( function() {
             sortGuildTeams();
             
         }
-      }).disableSelection();
+      });
+//.disableSelection();
 
   $( "#teamBuilder" ).sortable({
     update: function(event, ui ){
@@ -91,7 +92,7 @@ $( function() {
     handle: ".playerBanner",
     receive: function(event, ui){
       var $item = $(ui.item);
-      $close = $("<div>",{class: "closeTeam", text:"X"});
+      var $close = $("<div>",{class: "closeTeam", text:"X"});
       var $cloned = $item.clone();
       $cloned.find("li>.inuse").remove();
 

@@ -297,7 +297,7 @@ li {
   color: #000;
   -webkit-transform-origin: center bottom;
   transform-origin: center bottom;
-  background: center 0 transparent url('../images/borders/star.png') no-repeat;
+  background: center 0 transparent url('./images/star.png') no-repeat;
   background-size: 100%;
 }
 .playerData .star1 {
@@ -329,10 +329,10 @@ li {
     transform: translateX(-50%) rotate(60deg);
 }
 .playerData .star-inactive {
-    background-image: url('../images/borders/star-inactive.png');
+    background-image: url('./images/star-inactive.png');
 }
 .zetas{
-  background: center 0 transparent url(../images/zeta.png) no-repeat;
+  background: center 0 transparent url(./images/zeta.png) no-repeat;
   background-size: cover;
   bottom: 0;
   left: -25%;

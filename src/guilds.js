@@ -1,3 +1,6 @@
+import InUse from './images/inuse.png';
+import Locked from './images/locked.png';
+
 //var guildObjects = {};
 var lastLoaded = false;
 
@@ -61,12 +64,12 @@ window.guildBuildMemberToon = function($Template, ToonData){
 		$toon.attr("value", _power).append(
 			$("<a>", { href: 'https://swgoh.gg' + ToonData.url, target: "_blank"}).append(
 				$("<img>", {
-					src: 'images/borders/gear-icon-g' + ToonData.gear_level + ".svg",
+					src: './gear/gear-icon-g' + ToonData.gear_level + ".svg",
 					class: "playerGear"
 				})
 			),
 			$("<img>", {
-				src: 'images/inuse.png',
+				src: InUse,
 				class: "inuse hiddenData"
 			}),
 			 $("<div>", {class:"gearLevel hiddenData", text: ToonData.gear_level}),
@@ -77,7 +80,7 @@ window.guildBuildMemberToon = function($Template, ToonData){
 		$toon.append(function(e){
 			var rtn = $();
 			for(var x = 0; x < 7; x++){
-				_this = $("<div>", {class:"star star" + (x+1)});
+				var _this = $("<div>", {class:"star star" + (x+1)});
 				if(ToonData.rarity < (x + 1)){
 					_this.addClass("star-inactive");
 				}
@@ -92,7 +95,7 @@ window.guildBuildMemberToon = function($Template, ToonData){
 
 	} else{ 
 		$toon.attr("value", 0).addClass("locked").append($("<img>", {
-			src: 'images/padlock-3-24.png',
+			src: Locked,
 			class: "lock"
 		}));
 	}

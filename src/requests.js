@@ -20,7 +20,7 @@ $(document).ready(function(){
 
         var $team = $("#teamBuilder").children();
 
-        requestJSON("guildData.php", { character: false, guild: requestSelectedGuild(true)}, updateFilteredPlayers, false);
+        requestJSON("./scripts/getGuildData.php", { character: false, guild: requestSelectedGuild(true)}, updateFilteredPlayers, false);
         
         $team.each(function(){
             var _item = $(this);
@@ -38,7 +38,7 @@ window.requestSelectedGuild = function(asRequest = false){
     return (!asRequest ? "guild_": "") + $("#banner .selected").attr("value");
 }
 window.requestGuildToons = function($toon){
-    requestJSON("guildData.php", { character: $toon.attr("value"), guild: requestSelectedGuild(true)}, guildBuildMemberTeams, $toon);
+    requestJSON("./scripts/getGuildData.php", { character: $toon.attr("value"), guild: requestSelectedGuild(true)}, guildBuildMemberTeams, $toon);
 }
 
 window.requestJSON = function(url, data, callback, passThroughData){
@@ -80,7 +80,7 @@ window.requestToons = function(){
         }
 
         request = $.ajax({
-            url: "../scripts/toons.json",
+            url: "./scripts/toons.json",
             contentType: "application/json",
             datatype: "JSON"
         });
